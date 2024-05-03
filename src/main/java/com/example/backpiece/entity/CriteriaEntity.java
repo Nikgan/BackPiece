@@ -13,3 +13,4 @@ public class CriteriaEntity {
     private long sport_id;
     private String criterion_name;
 }
+//testGit
