@@ -3,7 +3,7 @@ package com.example.backpiece;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.example.backpiece"})
 public class BackPieceApplication {
 
     public static void main(String[] args) {
