@@ -15,9 +15,9 @@ public class ScoreEntity {
     private Long id;
     @JoinColumn(name = "participant", referencedColumnName = "id")
     @OneToOne
-    private Long participant_id;
+    private ParticipantEntity participant_id;
     @JoinColumn(name = "criteria", referencedColumnName = "id")
     @OneToOne
-    private Long criterion_id;
+    private CriteriaEntity criterion_id;
     private double score;
 }

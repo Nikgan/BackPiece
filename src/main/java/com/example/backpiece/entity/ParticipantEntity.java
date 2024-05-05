@@ -18,6 +18,6 @@ public class ParticipantEntity {
     private String middle_name;
     @JoinColumn(name = "sport", referencedColumnName = "id")
     @OneToOne
-    private Long sport_id;
+    private SportEntity sport_id;
 
 }
