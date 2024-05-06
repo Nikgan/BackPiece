@@ -2,11 +2,15 @@ package com.example.backpiece.controller;
 
 import com.example.backpiece.entity.SportEntity;
 import com.example.backpiece.exceptions.SportAlreadyExistsException;
+import com.example.backpiece.projection.SportProjection;
 import com.example.backpiece.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
 @Controller
 @RequestMapping("/sport")
 public class SportController {
@@ -24,10 +28,7 @@ public class SportController {
         }
     }
     @GetMapping
-    public ResponseEntity getSportsName() {
-        try {
-            return ResponseEntity.ok("Всё ок");
-        }catch(Exception e) {
-            return ResponseEntity.badRequest().body("Произошла ашибка");}
+    public ResponseEntity<List<SportProjection>> getSports() {
+        return ResponseEntity.ok(service.getAllSports());
     }
 }

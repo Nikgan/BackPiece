@@ -11,7 +11,7 @@ import jakarta.persistence.*;
 @Table(name="sport")
 public class SportEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String sportName;
 }

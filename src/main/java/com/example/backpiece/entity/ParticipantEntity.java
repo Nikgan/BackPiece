@@ -15,9 +15,8 @@ public class ParticipantEntity {
     private Long id;
     private String surname;
     private String name;
-    private String middle_name;
+    private String middleName;
     @OneToOne
     @JoinColumn(name = "sport_id")
     private SportEntity sportEntity;
-
 }

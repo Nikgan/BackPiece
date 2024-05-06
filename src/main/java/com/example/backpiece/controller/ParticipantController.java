@@ -1,20 +1,34 @@
 package com.example.backpiece.controller;
 
+import com.example.backpiece.entity.ParticipantEntity;
+import com.example.backpiece.exceptions.ParticipantAlreadyExistsException;
+import com.example.backpiece.projection.ParticipantProjection;
+import com.example.backpiece.projection.SportProjection;
+import com.example.backpiece.service.ParticipantService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/participant")
 public class ParticipantController {
-    @GetMapping
-    public ResponseEntity getParticipantName(){
-        try {
-            return ResponseEntity.ok("Всё гуд!");
+    @Autowired
+    ParticipantService service;
+    @PostMapping(path = "/save")
+    public ResponseEntity saveParticipant(@RequestBody ParticipantEntity participant){
+        try{
+            service.addParticipant(participant);
+            return ResponseEntity.ok("Participant has been saved");
+        }catch (ParticipantAlreadyExistsException exception){
+            return ResponseEntity.badRequest().body(exception.getMessage());
         }catch (Exception e){
-            return ResponseEntity.badRequest().body("Ошибочка вышла");
+            return ResponseEntity.badRequest().body("Save error");
         }
-
+    }
+    @GetMapping
+    public ResponseEntity<List<ParticipantProjection>> getParticipant() {
+        return ResponseEntity.ok(service.getAllParticipant());
     }
 }
