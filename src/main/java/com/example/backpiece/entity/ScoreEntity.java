@@ -13,11 +13,11 @@ public class ScoreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @JoinColumn(name = "participant", referencedColumnName = "id")
     @OneToOne
-    private ParticipantEntity participant_id;
-    @JoinColumn(name = "criteria", referencedColumnName = "id")
+    @JoinColumn(name = "participant_id")
+    private ParticipantEntity participantEntity;
     @OneToOne
-    private CriteriaEntity criterion_id;
+    @JoinColumn(name = "criteria_id")
+    private CriteriaEntity criteriaEntity;
     private double score;
 }

@@ -16,8 +16,8 @@ public class ParticipantEntity {
     private String surname;
     private String name;
     private String middle_name;
-    @JoinColumn(name = "sport", referencedColumnName = "id")
     @OneToOne
-    private SportEntity sport_id;
+    @JoinColumn(name = "sport_id")
+    private SportEntity sportEntity;
 
 }

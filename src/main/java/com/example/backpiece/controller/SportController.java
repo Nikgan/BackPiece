@@ -1,8 +1,7 @@
 package com.example.backpiece.controller;
 
 import com.example.backpiece.entity.SportEntity;
-import com.example.backpiece.exceptions.TestException;
-import com.example.backpiece.repository.SportRepository;
+import com.example.backpiece.exceptions.SportAlreadyExistsException;
 import com.example.backpiece.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +17,7 @@ public class SportController {
         try{
             service.addSport(sport);
             return ResponseEntity.ok("Sport has been saved");
-        }catch (TestException exception){
+        }catch (SportAlreadyExistsException exception){
             return ResponseEntity.badRequest().body(exception.getMessage());
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Save error");
