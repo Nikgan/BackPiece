@@ -16,5 +16,5 @@ public class CriteriaEntity {
     @OneToOne
     @JoinColumn(name = "sport_id")
     private SportEntity sportEntity;
-    private String criterion_name;
+    private String criteriaName;
 }
