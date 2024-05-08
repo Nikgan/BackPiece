@@ -1,14 +1,12 @@
 package com.example.backpiece.controller;
 
+import com.example.backpiece.dto.ParticipantDTO;
 import com.example.backpiece.entity.ParticipantEntity;
 import com.example.backpiece.exceptions.ParticipantAlreadyExistsException;
-import com.example.backpiece.projection.ParticipantProjection;
-import com.example.backpiece.projection.SportProjection;
 import com.example.backpiece.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -28,7 +26,7 @@ public class ParticipantController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<ParticipantProjection>> getParticipant() {
+    public ResponseEntity<List<ParticipantDTO>> getParticipant() {
         return ResponseEntity.ok(service.getAllParticipant());
     }
 }

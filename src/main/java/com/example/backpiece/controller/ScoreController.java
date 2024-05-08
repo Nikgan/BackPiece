@@ -1,12 +1,8 @@
 package com.example.backpiece.controller;
 
+import com.example.backpiece.dto.ScoreDTO;
 import com.example.backpiece.entity.ScoreEntity;
-import com.example.backpiece.entity.SportEntity;
-import com.example.backpiece.exceptions.SportAlreadyExistsException;
-import com.example.backpiece.projection.ScoreProjection;
-import com.example.backpiece.projection.SportProjection;
 import com.example.backpiece.service.ScoreService;
-import com.example.backpiece.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +24,7 @@ public class ScoreController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<ScoreProjection>> getScore() {
+    public ResponseEntity<List<ScoreDTO>> getScore() {
         return ResponseEntity.ok(service.getAllScore());
     }
 }

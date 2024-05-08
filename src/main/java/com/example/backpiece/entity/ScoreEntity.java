@@ -2,7 +2,6 @@ package com.example.backpiece.entity;
 
 import lombok.Getter;
 import lombok.Setter;
-
 import jakarta.persistence.*;
 
 @Getter

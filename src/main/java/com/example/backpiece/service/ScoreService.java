@@ -1,15 +1,11 @@
 package com.example.backpiece.service;
 
+import com.example.backpiece.dto.ScoreDTO;
 import com.example.backpiece.entity.ScoreEntity;
-import com.example.backpiece.entity.SportEntity;
-import com.example.backpiece.exceptions.SportAlreadyExistsException;
-import com.example.backpiece.projection.ScoreProjection;
-import com.example.backpiece.projection.SportProjection;
 import com.example.backpiece.repository.ScoreRepository;
-import com.example.backpiece.repository.SportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -19,8 +15,12 @@ public class ScoreService {
     public ScoreEntity addScore(ScoreEntity score) {
         return scoreRepository.save(score);
     }
-    public List<ScoreProjection> getAllScore(){
-        List<ScoreProjection> score = scoreRepository.findAllBy();
-        return score;
+    public List<ScoreDTO> getAllScore(){
+        Iterable<ScoreEntity> scoreIterable = scoreRepository.findAll();
+        List<ScoreDTO> scoreDTOs = new ArrayList<>();
+        for (ScoreEntity score : scoreIterable) {
+            scoreDTOs.add(new ScoreDTO(score));
+        }
+        return scoreDTOs;
     }
 }

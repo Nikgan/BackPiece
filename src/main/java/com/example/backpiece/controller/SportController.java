@@ -1,8 +1,8 @@
 package com.example.backpiece.controller;
 
+import com.example.backpiece.dto.SportDTO;
 import com.example.backpiece.entity.SportEntity;
 import com.example.backpiece.exceptions.SportAlreadyExistsException;
-import com.example.backpiece.projection.SportProjection;
 import com.example.backpiece.service.SportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -28,7 +28,7 @@ public class SportController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<SportProjection>> getSports() {
+    public ResponseEntity<List<SportDTO>> getSports() {
         return ResponseEntity.ok(service.getAllSports());
     }
 }

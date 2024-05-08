@@ -1,17 +1,12 @@
 package com.example.backpiece.controller;
 
+import com.example.backpiece.dto.CriteriaDTO;
 import com.example.backpiece.entity.CriteriaEntity;
-import com.example.backpiece.entity.ParticipantEntity;
 import com.example.backpiece.exceptions.CriteriaAlreadyExistsException;
-import com.example.backpiece.exceptions.ParticipantAlreadyExistsException;
-import com.example.backpiece.projection.CriteriaProjection;
-import com.example.backpiece.projection.ParticipantProjection;
 import com.example.backpiece.service.CriteriaService;
-import com.example.backpiece.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
@@ -31,7 +26,7 @@ public class CriteriaController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<CriteriaProjection>> getParticipant() {
+    public ResponseEntity<List<CriteriaDTO>> getParticipant() {
         return ResponseEntity.ok(service.getAllCriteria());
     }
 }
