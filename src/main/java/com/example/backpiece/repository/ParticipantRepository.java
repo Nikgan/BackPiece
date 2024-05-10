@@ -8,6 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ParticipantRepository extends CrudRepository<ParticipantEntity, Long> {
-    @Query("SELECT NEW com.example.backpiece.dto.ParticipantScoreDTO(p.surname, p.name, p.middleName, s.score) FROM ParticipantEntity p JOIN ScoreEntity s ON p.id = s.participantEntity.id")
+    @Query("SELECT NEW com.example.backpiece.dto.ParticipantScoreDTO(p.surname, p.name, p.middleName, SUM(s.score)) \n" +
+            "FROM ParticipantEntity p \n" +
+            "JOIN ScoreEntity s ON p.id = s.participantEntity.id\n" +
+            "GROUP BY p.surname, p.name, p.middleName")
     List<ParticipantScoreDTO> getParticipantScores();
 }

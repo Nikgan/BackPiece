@@ -12,7 +12,7 @@ public class ScoreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "participant_id")
     private ParticipantEntity participantEntity;
     @OneToOne

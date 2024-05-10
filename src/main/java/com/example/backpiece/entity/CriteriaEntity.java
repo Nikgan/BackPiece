@@ -12,7 +12,7 @@ public class CriteriaEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "sport_id")
     private SportEntity sportEntity;
     private String criterionName;
