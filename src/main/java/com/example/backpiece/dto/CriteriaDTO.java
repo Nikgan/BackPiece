@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class CriteriaDTO {
     private SportEntity sportEntity;
-    private String criteriaName;
-    public CriteriaDTO(CriteriaEntity criteria){
-        this.sportEntity = criteria.getSportEntity();
-        this.criteriaName = criteria.getCriteriaName();
+    private String criterionName;
+    public CriteriaDTO(CriteriaEntity criterion){
+        this.sportEntity = criterion.getSportEntity();
+        this.criterionName = criterion.getCriterionName();
     }
 
 }

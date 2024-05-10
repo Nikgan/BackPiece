@@ -1,6 +1,6 @@
 package com.example.backpiece.controller;
 
-import com.example.backpiece.dto.SportDTO;
+import com.example.backpiece.dto.SportWithoutIdDTO;
 import com.example.backpiece.entity.SportEntity;
 import com.example.backpiece.exceptions.SportAlreadyExistsException;
 import com.example.backpiece.service.SportService;
@@ -28,7 +28,7 @@ public class SportController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<SportDTO>> getSports() {
+    public ResponseEntity<List<SportWithoutIdDTO>> getSports() {
         return ResponseEntity.ok(service.getAllSports());
     }
 }

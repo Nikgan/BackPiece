@@ -1,6 +1,7 @@
 package com.example.backpiece.service;
 
 import com.example.backpiece.dto.ParticipantDTO;
+import com.example.backpiece.dto.ParticipantScoreDTO;
 import com.example.backpiece.entity.ParticipantEntity;
 import com.example.backpiece.exceptions.ParticipantAlreadyExistsException;
 import com.example.backpiece.repository.ParticipantRepository;
@@ -24,5 +25,8 @@ public class ParticipantService {
             participantDTOs.add(new ParticipantDTO(participantEntity));
         }
         return participantDTOs;
+    }
+    public List<ParticipantScoreDTO> getParticipantScore(){
+        return participantRepository.getParticipantScores();
     }
 }

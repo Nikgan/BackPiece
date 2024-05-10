@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SportDTO {
+public class SportWithoutIdDTO {
     private String sportName;
 
-    public SportDTO(String sportName) {
+    public SportWithoutIdDTO(String sportName) {
         this.sportName = sportName;
     }
 }

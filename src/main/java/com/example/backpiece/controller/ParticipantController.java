@@ -1,6 +1,7 @@
 package com.example.backpiece.controller;
 
 import com.example.backpiece.dto.ParticipantDTO;
+import com.example.backpiece.dto.ParticipantScoreDTO;
 import com.example.backpiece.entity.ParticipantEntity;
 import com.example.backpiece.exceptions.ParticipantAlreadyExistsException;
 import com.example.backpiece.service.ParticipantService;
@@ -24,6 +25,10 @@ public class ParticipantController {
         }catch (Exception e){
             return ResponseEntity.badRequest().body("Save error");
         }
+    }
+    @GetMapping(path = "getParticipantScore")
+    public ResponseEntity<List<ParticipantScoreDTO>> getParticipantScore(){
+        return ResponseEntity.ok(service.getParticipantScore());
     }
     @GetMapping
     public ResponseEntity<List<ParticipantDTO>> getParticipant() {

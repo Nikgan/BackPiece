@@ -1,6 +1,6 @@
 package com.example.backpiece.service;
 
-import com.example.backpiece.dto.SportDTO;
+import com.example.backpiece.dto.SportWithoutIdDTO;
 import com.example.backpiece.entity.SportEntity;
 import com.example.backpiece.exceptions.SportAlreadyExistsException;
 import com.example.backpiece.repository.SportRepository;
@@ -21,12 +21,12 @@ public class SportService {
         return sportRepository.save(sport);
     }
 
-    public List<SportDTO> getAllSports(){
+    public List<SportWithoutIdDTO> getAllSports(){
         Iterable<SportEntity> sportsIterable = sportRepository.findAll();
-        List<SportDTO> sportDTOs = new ArrayList<>();
+        List<SportWithoutIdDTO> sportWithoutIdDTOS = new ArrayList<>();
         for (SportEntity sport : sportsIterable) {
-            sportDTOs.add(new SportDTO(sport.getSportName()));
+            sportWithoutIdDTOS.add(new SportWithoutIdDTO(sport.getSportName()));
         }
-        return sportDTOs;
+        return sportWithoutIdDTOS;
     }
 }

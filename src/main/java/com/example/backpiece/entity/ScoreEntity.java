@@ -16,7 +16,7 @@ public class ScoreEntity {
     @JoinColumn(name = "participant_id")
     private ParticipantEntity participantEntity;
     @OneToOne
-    @JoinColumn(name = "criteria_id")
+    @JoinColumn(name = "criterion_id")
     private CriteriaEntity criteriaEntity;
     private double score;
 }
