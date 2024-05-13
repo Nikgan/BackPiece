@@ -1,6 +1,7 @@
 package com.example.backpiece.controller;
 
 import com.example.backpiece.dto.ScoreDTO;
+import com.example.backpiece.dto.ScoreUpdateRequestDTO;
 import com.example.backpiece.entity.ScoreEntity;
 import com.example.backpiece.service.ScoreService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,5 +27,14 @@ public class ScoreController {
     @GetMapping
     public ResponseEntity<List<ScoreDTO>> getScore() {
         return ResponseEntity.ok(service.getAllScore());
+    }
+    @PostMapping("/updateScore")
+    public ResponseEntity<String> updateScoreForParticipantAndCriteria(@RequestBody ScoreUpdateRequestDTO scoreUpdateRequest) {
+        try {
+            service.updateScoreForParticipantAndCriteria(scoreUpdateRequest);
+            return ResponseEntity.ok("Score updated successfully.");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Save error");
+        }
     }
 }
