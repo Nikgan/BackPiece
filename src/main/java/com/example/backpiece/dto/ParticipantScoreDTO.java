@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ParticipantScoreDTO {
+    private Long id;
     private String surname;
     private String name;
     private String middleName;

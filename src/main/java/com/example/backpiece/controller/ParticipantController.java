@@ -1,5 +1,6 @@
 package com.example.backpiece.controller;
 
+import com.example.backpiece.dto.ParticipantCriteriasDTO;
 import com.example.backpiece.dto.ParticipantDTO;
 import com.example.backpiece.dto.ParticipantScoreDTO;
 import com.example.backpiece.entity.ParticipantEntity;
@@ -8,7 +9,10 @@ import com.example.backpiece.service.ParticipantService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/participant")
@@ -34,4 +38,9 @@ public class ParticipantController {
     public ResponseEntity<List<ParticipantDTO>> getParticipant() {
         return ResponseEntity.ok(service.getAllParticipant());
     }
+    @GetMapping("/{id}")
+    public ResponseEntity<ParticipantCriteriasDTO> getParticipantWithCriteriaNames(@PathVariable Long id) {
+        return ResponseEntity.ok(service.getCriteriaNamesByParticipantId(id));
+    }
 }
+
