@@ -1,6 +1,7 @@
 package com.example.backpiece.controller;
 
 import com.example.backpiece.entity.MyUser;
+import com.example.backpiece.exceptions.UserAlreadyExistsException;
 import com.example.backpiece.repository.MyUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -15,8 +16,13 @@ public class RegistrationController {
     @Autowired
     private PasswordEncoder passwordEncoder;
     @PostMapping("/register/user")
-    public MyUser createUser(@RequestBody MyUser user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        return myUserRepository.save(user);
+    public MyUser createUser(@RequestBody MyUser user) throws UserAlreadyExistsException {
+        if(myUserRepository.findByUsername(user.getUsername())==null) {
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+            return myUserRepository.save(user);
+        }
+        else {
+            throw new UserAlreadyExistsException("Пользователь с таким именем уже существует");
+        }
     }
 }
