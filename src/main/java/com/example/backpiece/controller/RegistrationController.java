@@ -17,12 +17,12 @@ public class RegistrationController {
     private PasswordEncoder passwordEncoder;
     @PostMapping("/register/user")
     public MyUser createUser(@RequestBody MyUser user) throws UserAlreadyExistsException {
-        if(myUserRepository.findByUsername(user.getUsername())==null) {
+        if(myUserRepository.findByUsername(user.getUsername()).isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
             return myUserRepository.save(user);
-        }
-        else {
+        } else {
             throw new UserAlreadyExistsException("Пользователь с таким именем уже существует");
         }
+
     }
 }
