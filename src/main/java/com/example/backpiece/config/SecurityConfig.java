@@ -20,6 +20,11 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Autowired
     private MyUserDetailService myUserDetailService;
+    @Autowired
+    private CustomAuthenticationSuccessHandler successHandler;
+
+    @Autowired
+    private CustomAuthenticationFailureHandler failureHandler;
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
         return httpSecurity
@@ -30,7 +35,12 @@ public class SecurityConfig {
                     registry.requestMatchers("/score/**","/criteria/**","/participant/**","sport/**").hasRole("USER");
                     registry.anyRequest().authenticated();
                 })
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .formLogin(form -> form
+                        .loginProcessingUrl("/login")
+                        .successHandler(successHandler)
+                        .failureHandler(failureHandler)
+                        .permitAll()
+                )
                 .build();
     }
     @Bean
