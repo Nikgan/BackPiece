@@ -36,7 +36,8 @@ public class ParticipantService {
     public ParticipantCriteriasDTO getCriteriaNamesByParticipantId(Long participantId) {
         ParticipantEntity participant = participantRepository.findById(participantId).orElse(null);
         List<String> criteriaNames = participantRepository.getCriteriaNamesByParticipantId(participantId);
-        ParticipantCriteriasDTO dto = new ParticipantCriteriasDTO(participant.getId(), participant.getName(), participant.getSurname(), participant.getMiddleName(), criteriaNames);
+        ParticipantCriteriasDTO dto = new ParticipantCriteriasDTO(participant.getId(), participant.getName(),
+                participant.getSurname(), participant.getMiddleName(), criteriaNames);
         return dto;
     }
 }

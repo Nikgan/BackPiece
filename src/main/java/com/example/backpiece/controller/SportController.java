@@ -28,7 +28,7 @@ public class SportController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<SportWithoutIdDTO>> getSports() {
+    public ResponseEntity<Iterable<SportEntity>> getSports() {
         return ResponseEntity.ok(service.getAllSports());
     }
 }

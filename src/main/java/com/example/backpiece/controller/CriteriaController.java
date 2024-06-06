@@ -26,7 +26,7 @@ public class CriteriaController {
         }
     }
     @GetMapping
-    public ResponseEntity<List<CriteriaDTO>> getParticipant() {
+    public ResponseEntity<Iterable<CriteriaEntity>> getParticipant() {
         return ResponseEntity.ok(service.getAllCriteria());
     }
 }

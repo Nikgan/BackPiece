@@ -10,7 +10,8 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface ParticipantRepository extends CrudRepository<ParticipantEntity, Long> {
-    @Query("SELECT NEW com.example.backpiece.dto.ParticipantScoreDTO(p.id, p.surname, p.name, p.middleName, SUM(s.score)) \n" +
+    @Query("SELECT NEW com.example.backpiece.dto.ParticipantScoreDTO(p.id, p.surname, p.name, " +
+            "p.middleName, SUM(s.score)) \n" +
             "FROM ParticipantEntity p \n" +
             "JOIN ScoreEntity s ON p.id = s.participantEntity.id\n" +
             "GROUP BY p.id, p.surname, p.name, p.middleName")

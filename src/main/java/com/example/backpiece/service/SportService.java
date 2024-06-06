@@ -21,12 +21,8 @@ public class SportService {
         return sportRepository.save(sport);
     }
 
-    public List<SportWithoutIdDTO> getAllSports(){
+    public Iterable<SportEntity> getAllSports(){
         Iterable<SportEntity> sportsIterable = sportRepository.findAll();
-        List<SportWithoutIdDTO> sportWithoutIdDTOS = new ArrayList<>();
-        for (SportEntity sport : sportsIterable) {
-            sportWithoutIdDTOS.add(new SportWithoutIdDTO(sport.getSportName()));
-        }
-        return sportWithoutIdDTOS;
+        return sportsIterable;
     }
 }

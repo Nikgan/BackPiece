@@ -8,6 +8,7 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ScoreUpdateRequestDTO {
+    private Long id;
     private Long participantId;
     private String criterionName;
     private double score;

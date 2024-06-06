@@ -17,12 +17,8 @@ public class CriteriaService {
     public CriteriaEntity addCriteria(CriteriaEntity criteria) throws CriteriaAlreadyExistsException {
         return criteriaRepository.save(criteria);
     }
-    public List<CriteriaDTO> getAllCriteria(){
+    public Iterable<CriteriaEntity> getAllCriteria(){
         Iterable<CriteriaEntity> criteriaIterable = criteriaRepository.findAll();
-        List<CriteriaDTO> criteriaDTOs = new ArrayList<>();
-        for (CriteriaEntity criteria : criteriaIterable) {
-            criteriaDTOs.add(new CriteriaDTO(criteria));
-        }
-        return criteriaDTOs;
+        return criteriaIterable;
     }
 }
