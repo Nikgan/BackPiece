@@ -11,5 +11,6 @@ public class ScoreUpdateRequestDTO {
     private Long id;
     private Long participantId;
     private String criterionName;
+    private String username;
     private double score;
 }

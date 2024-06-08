@@ -12,11 +12,18 @@ public class ScoreEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     @ManyToOne
     @JoinColumn(name = "participant_id")
     private ParticipantEntity participantEntity;
-    @OneToOne
+
+    @ManyToOne
     @JoinColumn(name = "criterion_id")
     private CriteriaEntity criteriaEntity;
+
     private double score;
+
+    @ManyToOne
+    @JoinColumn(name = "judge_id")
+    private MyUser user;
 }
