@@ -15,7 +15,10 @@ import java.util.List;
 public interface ScoreRepository extends CrudRepository<ScoreEntity, Long> {
     @Query("SELECT s FROM ScoreEntity s JOIN s.participantEntity p JOIN s.user u " +
             "WHERE p.id = :participantId AND s.criteriaEntity = :criteriaEntity AND u.username = :username")
-    ScoreEntity findByCriteriaEntityAndParticipantIdAndUsername(@Param("criteriaEntity") CriteriaEntity criteriaEntity, @Param("participantId") Long participantId, @Param("username") String username);
-        List<ScoreEntity> findByParticipantEntityAndCriteriaEntity(ParticipantEntity participantEntity, CriteriaEntity criteriaEntity);
+    ScoreEntity findByCriteriaEntityAndParticipantIdAndUsername(@Param("criteriaEntity") CriteriaEntity criteriaEntity,
+                                                                @Param("participantId") Long participantId,
+                                                                @Param("username") String username);
+        List<ScoreEntity> findByParticipantEntityAndCriteriaEntity(ParticipantEntity participantEntity,
+                                                                   CriteriaEntity criteriaEntity);
         List<ScoreEntity> findByUserAndParticipantEntity(MyUser user, ParticipantEntity participantEntity);
 }

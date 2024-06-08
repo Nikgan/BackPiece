@@ -7,6 +7,7 @@ import com.example.backpiece.entity.CriteriaEntity;
 import com.example.backpiece.entity.MyUser;
 import com.example.backpiece.entity.ParticipantEntity;
 import com.example.backpiece.entity.ScoreEntity;
+import com.example.backpiece.exceptions.NotFoundException;
 import com.example.backpiece.repository.CriteriaRepository;
 import com.example.backpiece.repository.MyUserRepository;
 import com.example.backpiece.repository.ScoreRepository;
@@ -22,7 +23,7 @@ public class ScoreService {
     @Autowired
     CriteriaRepository criteriaRepository;
     @Autowired
-    MyUserRepository userRepository; // Репозиторий для пользователей (судей)
+    MyUserRepository userRepository;
 
     public ScoreEntity addScore(ScoreEntity score, Authentication authentication) {
         String username = authentication.getName();
@@ -39,18 +40,22 @@ public class ScoreService {
         return scoreDTOs;
     }
 
-    public void updateScoreForParticipantAndCriteria(ScoreUpdateRequestDTO scoreUpdateRequest, Authentication authentication)
-    {
+    public void updateScoreForParticipantAndCriteria(ScoreUpdateRequestDTO scoreUpdateRequest,
+                                                     Authentication authentication) throws NotFoundException {
         String username = authentication.getName();
         MyUser user = (userRepository.findByUsername(username)).get();
         CriteriaEntity criteriaEntity = criteriaRepository.findByCriterionName(scoreUpdateRequest.getCriterionName());
         if (criteriaEntity != null) {
-            ScoreEntity scoreEntity = scoreRepository.findByCriteriaEntityAndParticipantIdAndUsername(criteriaEntity, scoreUpdateRequest.getParticipantId(),user.getUsername());
+            ScoreEntity scoreEntity = scoreRepository.findByCriteriaEntityAndParticipantIdAndUsername(criteriaEntity,
+                    scoreUpdateRequest.getParticipantId(),user.getUsername());
             if (scoreEntity != null) {
                 scoreEntity.setScore(scoreUpdateRequest.getScore());
                 scoreEntity.setUser(user);
                 scoreRepository.save(scoreEntity);
             }
+        }
+        else {
+            throw new NotFoundException("Not found");
         }
     }
 }

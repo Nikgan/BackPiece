@@ -31,7 +31,8 @@ public class ScoreController {
         return ResponseEntity.ok(service.getAllScores());
     }
     @PostMapping("/updateScore")
-    public ResponseEntity<String> updateScoreForParticipantAndCriteria(@RequestBody ScoreUpdateRequestDTO scoreUpdateRequest, Authentication authentication) {
+    public ResponseEntity<String> updateScoreForParticipantAndCriteria(@RequestBody ScoreUpdateRequestDTO scoreUpdateRequest,
+                                                                       Authentication authentication) {
         try {
             service.updateScoreForParticipantAndCriteria(scoreUpdateRequest,authentication);
             return ResponseEntity.ok("Score updated successfully.");

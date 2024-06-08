@@ -1,6 +1,7 @@
 package com.example.backpiece.controller;
 
 import com.example.backpiece.entity.MyUser;
+import com.example.backpiece.exceptions.NotFoundException;
 import com.example.backpiece.exceptions.UserAlreadyExistsException;
 import com.example.backpiece.repository.MyUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +9,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.Optional;
 
 @RestController
 public class RegistrationController {
@@ -24,5 +27,27 @@ public class RegistrationController {
             throw new UserAlreadyExistsException("Пользователь с таким именем уже существует");
         }
 
+    }
+    @PostMapping("/register/giveAdminRules")
+    public MyUser giveAdminRules(@RequestBody MyUser user) throws NotFoundException {
+        Optional<MyUser> myUserOptional = myUserRepository.findByUsername(user.getUsername());
+        if (myUserOptional.isPresent()) {
+            MyUser myUser = myUserOptional.get();
+            myUser.setRole("ADMIN,USER");
+            return myUserRepository.save(myUser);
+        } else {
+            throw new NotFoundException("User not found");
+        }
+    }
+    @PostMapping("/register/takeAdminRules")
+    public MyUser takeAdminRules(@RequestBody MyUser user) throws NotFoundException{
+        Optional<MyUser> myUserOptional = myUserRepository.findByUsername(user.getUsername());
+        if (myUserOptional.isPresent()) {
+            MyUser myUser = myUserOptional.get();
+            myUser.setRole("USER");
+            return myUserRepository.save(myUser);
+        } else {
+            throw new NotFoundException("User not found");
+        }
     }
 }
