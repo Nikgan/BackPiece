@@ -32,7 +32,8 @@ public class SecurityConfig {
                 .authorizeHttpRequests(registry -> {
                     registry.requestMatchers( "/register/user").permitAll();
                     registry.requestMatchers("/criteria/save",
-                            "/participant/save","/sport/save", "/register/giveAdminRules").hasRole("ADMIN");
+                            "/participant/save","/sport/save", "/register/giveAdminRules",
+                            "/score/updateScoreWithRules").hasRole("ADMIN");
                     registry.requestMatchers("/score/**","/criteria/**",
                             "/participant/**","sport/**").hasRole("USER");
                     registry.anyRequest().authenticated();

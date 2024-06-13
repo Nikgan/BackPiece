@@ -58,4 +58,15 @@ public class ScoreService {
             throw new NotFoundException("Not found");
         }
     }
+    public void updateScoreWithRules(ScoreUpdateRequestDTO scoreUpdateRequestDTO) throws NotFoundException{
+        String username = scoreUpdateRequestDTO.getUsername();
+        CriteriaEntity criteriaEntity = criteriaRepository.findByCriterionName(scoreUpdateRequestDTO.getCriterionName());
+        if (criteriaEntity != null) {
+            ScoreEntity scoreEntity = scoreRepository.findByCriteriaEntityAndParticipantIdAndUsername(criteriaEntity,
+                    scoreUpdateRequestDTO.getParticipantId(), username);
+            if (scoreEntity != null) {
+                scoreEntity.setScore(scoreUpdateRequestDTO.getScore());
+            }
+        }
+    }
 }

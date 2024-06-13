@@ -40,4 +40,13 @@ public class ScoreController {
             return ResponseEntity.badRequest().body("Save error");
         }
     }
+    @PostMapping("/updateScoreWithRules")
+    public ResponseEntity<String> updateScoreWithRules(@RequestBody ScoreUpdateRequestDTO scoreUpdateRequestDTO){
+        try {
+            service.updateScoreWithRules(scoreUpdateRequestDTO);
+            return ResponseEntity.ok("Score updated successfully");
+        }catch (Exception e){
+            return ResponseEntity.badRequest().body("Save Error");
+        }
+    }
 }

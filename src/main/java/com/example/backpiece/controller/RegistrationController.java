@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@RestController
+@RestController("/register")
 public class RegistrationController {
     @Autowired
     private MyUserRepository myUserRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @PostMapping("/register/user")
+    @PostMapping("/user")
     public MyUser createUser(@RequestBody MyUser user) throws UserAlreadyExistsException {
         if(myUserRepository.findByUsername(user.getUsername()).isEmpty()) {
             user.setPassword(passwordEncoder.encode(user.getPassword()));
@@ -28,7 +28,7 @@ public class RegistrationController {
         }
 
     }
-    @PostMapping("/register/giveAdminRules")
+    @PostMapping("/giveAdminRules")
     public MyUser giveAdminRules(@RequestBody MyUser user) throws NotFoundException {
         Optional<MyUser> myUserOptional = myUserRepository.findByUsername(user.getUsername());
         if (myUserOptional.isPresent()) {
@@ -39,7 +39,7 @@ public class RegistrationController {
             throw new NotFoundException("User not found");
         }
     }
-    @PostMapping("/register/takeAdminRules")
+    @PostMapping("/takeAdminRules")
     public MyUser takeAdminRules(@RequestBody MyUser user) throws NotFoundException{
         Optional<MyUser> myUserOptional = myUserRepository.findByUsername(user.getUsername());
         if (myUserOptional.isPresent()) {
