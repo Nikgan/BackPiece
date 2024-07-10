@@ -1,6 +1,5 @@
 package com.example.backpiece.controller;
 
-import com.example.backpiece.dto.SaveScoreDTO;
 import com.example.backpiece.dto.ScoreDTO;
 import com.example.backpiece.dto.ScoreUpdateRequestDTO;
 import com.example.backpiece.entity.ScoreEntity;
