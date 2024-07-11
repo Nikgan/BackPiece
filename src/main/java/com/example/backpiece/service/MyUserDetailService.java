@@ -20,6 +20,9 @@ public class MyUserDetailService implements UserDetailsService {
         Optional<MyUser> user = myUserRepository.findByUsername(username);
         if(user.isPresent()){
             var userObj = user.get();
+            if (!userObj.isEnabled()) {
+                throw new UsernameNotFoundException("User not activated");
+            }
             return User.builder()
                     .username(userObj.getUsername())
                     .password(userObj.getPassword())

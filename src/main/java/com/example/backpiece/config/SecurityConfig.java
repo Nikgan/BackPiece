@@ -30,13 +30,11 @@ public class SecurityConfig {
         return httpSecurity
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(registry -> {
-                    registry.requestMatchers( "/register/user").permitAll();
+                    registry.requestMatchers( "/register/user", "/activate").permitAll();
                     registry.requestMatchers("/criteria/save",
                             "/participant/save","/sport/save", "/register/giveAdminRules",
                             "/score/updateScoreWithRules").hasRole("ADMIN");
-                    registry.requestMatchers("/score/**","/criteria/**",
-                            "/participant/**","sport/**").hasRole("USER");
-                    registry.anyRequest().authenticated();
+                    registry.anyRequest().hasAnyRole("ADMIN", "USER");
                 })
                 .formLogin(form -> form
                         .loginProcessingUrl("/login")
@@ -44,6 +42,7 @@ public class SecurityConfig {
                         .failureHandler(failureHandler)
                         .permitAll()
                 )
+                .userDetailsService(myUserDetailService)
                 .build();
     }
     @Bean

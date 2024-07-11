@@ -2,8 +2,10 @@ package com.example.backpiece.controller;
 
 import com.example.backpiece.entity.MyUser;
 import com.example.backpiece.exceptions.NotFoundException;
+import com.example.backpiece.exceptions.UnknownMailException;
 import com.example.backpiece.exceptions.UserAlreadyExistsException;
 import com.example.backpiece.repository.MyUserRepository;
+import com.example.backpiece.service.MyUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -12,19 +14,26 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Optional;
 
-@RestController("/register")
+@RestController
 public class RegistrationController {
     @Autowired
     private MyUserRepository myUserRepository;
     @Autowired
     private PasswordEncoder passwordEncoder;
-    @PostMapping("/user")
+    @Autowired
+    MyUserService userService;
+    @PostMapping("register/user")
     public MyUser createUser(@RequestBody MyUser user) throws UserAlreadyExistsException {
-        if(myUserRepository.findByUsername(user.getUsername()).isEmpty()) {
-            user.setPassword(passwordEncoder.encode(user.getPassword()));
-            return myUserRepository.save(user);
+        if(!myUserRepository.findByUsername(user.getUsername()).isPresent() && !myUserRepository.findByMail(user.getMail()).isPresent()) {
+            if(!user.getMail().isEmpty()) {
+                user.setPassword(passwordEncoder.encode(user.getPassword()));
+                userService.sendActivationEmail(user);
+                return myUserRepository.save(user);
+            } else {
+                throw new UnknownMailException("Введите корректный email");
+            }
         } else {
-            throw new UserAlreadyExistsException("Пользователь с таким именем уже существует");
+            throw new UserAlreadyExistsException("Пользователь с таким именем или email уже существует");
         }
 
     }

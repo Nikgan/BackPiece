@@ -7,4 +7,6 @@ import java.util.Optional;
 
 public interface MyUserRepository extends CrudRepository<MyUser,Long> {
     Optional<MyUser> findByUsername(String username);
+    MyUser findByActivationToken(String activationToken);
+    Optional<MyUser> findByMail(String mail);
 }
